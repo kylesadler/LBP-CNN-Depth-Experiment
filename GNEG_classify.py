@@ -25,7 +25,8 @@ def main(feature_type, classifier_type):
     label_h5py = h5py.File("label.h5", 'r')
     
     keys = random.Random(1).shuffle(list(h5py_file.keys()))
-    index = int(len(keys*.8))
+    train_index = int(len(keys*.64))
+    val_index = int(len(keys*.8))
     
     
     checkpoint = ModelCheckpoint(
@@ -36,11 +37,11 @@ def main(feature_type, classifier_type):
     
     
     model.fit_generator(
-        generate_data(img_h5py, label_h5py, keys[:index]),
+        generate_data(img_h5py, label_h5py, keys[:train_index]),
         epochs=150,
         verbose=2,
         callbacks=checkpoint,
-        validation_data=generate_data(img_h5py, label_h5py, keys[index:])
+        validation_data=generate_data(img_h5py, label_h5py, keys[train_index:val_index])
         )
     
     

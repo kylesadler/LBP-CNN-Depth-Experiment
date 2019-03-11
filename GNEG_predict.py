@@ -33,12 +33,11 @@ def main(feature_type, classifier_type):
         )
     
     
-    model.fit_generator(
-        generate_data(img_h5py, label_h5py, keys[:index]),
+    model.predict_generator(
+        generate_data(img_h5py, label_h5py, keys[index:]),
         epochs=150,
         verbose=2,
         callbacks=checkpoint,
-        validation_data=generate_data(img_h5py, label_h5py, keys[index:])
         )
     
     
