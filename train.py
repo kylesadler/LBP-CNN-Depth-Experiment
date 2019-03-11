@@ -9,7 +9,8 @@ import os
 import h5py
 import sys
 import random
-
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D
 
 def main(feature_type, classifier_type):
         

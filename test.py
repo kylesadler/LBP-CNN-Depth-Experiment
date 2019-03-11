@@ -10,6 +10,8 @@ import h5py
 import sys
 import random
 from keras.models import model_from_json
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D
 
 def main(model_dir):
         
