@@ -8,6 +8,8 @@
 import os
 import h5py
 import sys
+import random
+from keras.models import model_from_json
 
 def main(model_dir):
         
@@ -31,9 +33,8 @@ def main(model_dir):
     
     model.predict_generator(
         generate_data(img_h5py, label_h5py, keys[index:]),
-        epochs=150,
         verbose=2,
-        callbacks=checkpoint,
+        callbacks=[checkpoint],
         )
     
     

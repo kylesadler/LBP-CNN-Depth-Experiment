@@ -40,7 +40,7 @@ def main(feature_type, classifier_type):
         generate_data(img_h5py, label_h5py, keys[:train_index]),
         epochs=150,
         verbose=2,
-        callbacks=checkpoint,
+        callbacks=[checkpoint],
         validation_data=generate_data(img_h5py, label_h5py, keys[train_index:val_index])
         )
     
