@@ -73,15 +73,17 @@ def get_CNN(cnn_layers):
     model = Sequential()
     
     if(cnn_layers > 0):
-        model.add(conv2D(256, input_dim=(256,256), activation='relu'))
+        model.add(Conv2D(32, kernel_size=(3, 3), padding="same", input_shape=(256,256,1), activation='relu'))
         for i in range(cnn_layers-1):
-            model.add(conv2D(256, activation='relu'))
-    
-    model.add(Dense(256, activation='relu'))
-    model.add(Dense(30), activation='relu')
-    model.add(Dense(2), activation='softmax')
+            model.add(Conv2D(32, kernel_size=(3, 3), padding="same", activation='relu'))
+        model.add(Dense(256, activation='relu'))
+    else:
+        model.add(Dense(256, input_shape=(256,256,1, ), activation='relu'))
 
-    model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
+    model.add(Dense(30, activation='relu'))
+    model.add(Dense(2, activation='softmax'))
+
+    model.compile(loss='mean_squared_error', optimizer="sgd", metrics=['accuracy'])
     return model
     
 
